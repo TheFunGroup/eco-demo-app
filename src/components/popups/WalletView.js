@@ -33,6 +33,8 @@ export default function WalletView(props) {
   const [daiBalanceUSD, setDaiBalanceUSD] = useState();
   const [usdtBalance, setUsdtBalance] = useState();
   const [usdtBalanceUSD, setUsdtBalanceUSD] = useState();
+  const [ecoBalance, setEcoBalance] = useState();
+  const [ecoBalanceUSD, setEcoBalanceUSD] = useState();
 
   const [nfts, setNfts] = useState([])
 
@@ -76,6 +78,12 @@ export default function WalletView(props) {
     usdtBalance = ethers.utils.formatUnits(usdtBalance, 6)
     setUsdtBalance(Number(usdtBalance.toString()).toFixed(2))
     setUsdtBalanceUSD(await toUSD("USDT", usdtBalance));
+
+    const ecoContract = new ethers.Contract("0xb4fdc1795443487d1cfeac75a4ab0767dbed2c6f", erc20Abi, provider);
+    let ecoBalance = await ecoContract.balanceOf(wallet.address)
+    ecoBalance = ethers.utils.formatUnits(ecoBalance, 6)
+    setEcoBalance(Number(ecoBalance.toString()).toFixed(2))
+    setEcoBalanceUSD((ecoBalance * 0.0158).toFixed(2));
   }
 
   async function getNFTs(){
@@ -222,6 +230,19 @@ export default function WalletView(props) {
                         </div>
                       </div>
                       <div className="text-black">{`$${usdtBalanceUSD}`}</div>
+                    </div>
+                  )}
+
+                  {ecoBalance && (
+                    <div className="w-full flex justify-between items-center mt-[6px]">
+                      <div className="flex items-center">
+                        <Image src="/ecoIcon.png" width="40" height="40" alt="" className="mr-4" />
+                        <div>
+                          <div className="text-black">ECO Coin</div>
+                          <div className="text-[#667085] text-sm">{`${ecoBalance} ECO`}</div>
+                        </div>
+                      </div>
+                      <div className="text-black">{`$${ecoBalanceUSD}`}</div>
                     </div>
                   )}
 

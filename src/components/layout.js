@@ -14,9 +14,9 @@ export default function Layout(props) {
   return (
     <div className="w-full h-full">
       <Head>
-        <title>fun.xyz demo</title>
+        <title>Eco Demo</title>
         <meta name="description" content="The Wallet Development Platform"/>
-        <link rel="icon" href="/fun.svg?" />
+        <link rel="icon" href="/ecoIcon.png" />
       </Head>
 
       <main className="w-full h-full flex flex-col">
