@@ -78,18 +78,18 @@ export default function ConnectWallet(props) {
   }, [router.query]);
 
   async function connectFunWallet(connector, authId, provider, publicKey) {
-    const authIdUsed = await isAuthIdUsed(authId)
-    if (!authIdUsed) {
-      if (!linked[connector]) {
-        linked[connector] = [authId, publicKey];
-        setLinked(linked)
-      }
-      setProvider(provider)
-      setShowLinkMore(true)
-      setLoading(false)
-      setConnecting("")
-      return;
-    }
+    // const authIdUsed = await isAuthIdUsed(authId)
+    // if (!authIdUsed) {
+    //   if (!linked[connector]) {
+    //     linked[connector] = [authId, publicKey];
+    //     setLinked(linked)
+    //   }
+    //   setProvider(provider)
+    //   setShowLinkMore(true)
+    //   setLoading(false)
+    //   setConnecting("")
+    //   return;
+    // }
     const auth = new MultiAuthEoa({ provider, authIds: [[authId, publicKey]] })
     const FunWallet = await createFunWallet(auth)
     const addr = await FunWallet.getAddress()
