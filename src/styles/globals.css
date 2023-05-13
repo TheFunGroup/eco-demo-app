@@ -28,7 +28,7 @@ input[type=number] {
 }
 
 html, body, #__next{
-  background: #EDF1F4;
+  background: #0B1A39;
   margin: 0px;
   width: 100%;
   height: 100%;
@@ -39,9 +39,9 @@ html, body, #__next{
 }
 
 .modal{
-  background: linear-gradient(125.87deg, rgba(255, 255, 255, 0.69) 0%, rgba(255, 255, 255, 0.42) 99.97%);
-  border: 1px solid #E4E7EC;
-  box-shadow: 0px 20px 24px -4px rgba(16, 24, 40, 0.1), 0px 8px 8px -4px rgba(16, 24, 40, 0.04);
+  background: #030A18;
+  border: 1px solid #E4E7EC1f;
+  /* box-shadow: 0px 20px 24px -4px rgba(16, 24, 40, 0.1), 0px 8px 8px -4px rgba(16, 24, 40, 0.04); */
   border-radius: 12px;
   padding: 24px;
 }
@@ -63,14 +63,13 @@ html, body, #__next{
 }
 
 .button{
-  background: #FCFCFD;;
-  border: 1px solid #E4E7EC;
-  border-radius: 12px;
+  background: #FFFFFF14;
+  /* border-radius: 12px; */
   cursor: pointer;
 }
 
 .button:hover{
-  background: #f9f9f9;
+  background: #FFFFFF20;
 }
 
 .button-dark{

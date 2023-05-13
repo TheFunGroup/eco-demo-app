@@ -176,16 +176,16 @@ export default function ConnectWallet(props) {
   } else {
     return (
       <div className={`w-[360px] modal flex flex-col items-center text-center -mt-[64px]`} >
-        <Image src="/fun.svg" width="52" height="42" alt="" />
-        <div className="font-semibold text-2xl mt-6 text-[#101828]">{`${authType == "signup" ? "Create" : "Login to"} FunWallet`}</div>
-        <div className="text-sm text-[#667085] mt-1">Explore what you can do with FunWallet</div>
+        <Image src="/eco.svg" width="52" height="42" alt="" />
+        <div className="font-black text-2xl mt-6 text-white">Welcome Eco!</div>
+        <div className="text-sm font-mono text-[#7BFAFC] mt-1">Explore FunWallet</div>
 
         <div className="mt-8 flex w-full justify-between">
           {Object.keys(socials).map((key) => {
             const social = socials[key]
             return (
               <div
-                className="max-w-[56px] button rounded-lg border-[#D0D5DD] border-[1px] bg-[rgb(64, 153, 255)] flex justify-center items-center cursor-pointer py-[14px] px-4"
+                className="max-w-[56px] button rounded-full flex justify-center items-center cursor-pointer py-[14px] px-4"
                 onClick={() => { if (!connecting) connectMagic(key) }}
                 key={key}
               >
@@ -201,18 +201,18 @@ export default function ConnectWallet(props) {
         </div>
 
         <div className="w-full flex items-center my-6">
-          <div className="w-full bg-[#E4E7EC] h-[1px]"></div>
-          <div className="text-[#667085] mx-2">OR</div>
-          <div className="w-full bg-[#E4E7EC] h-[1px]"></div>
+          <div className="w-full bg-[#9BA0CC] h-[1px]"></div>
+          <div className="text-[#9BA0CC] mx-2">OR</div>
+          <div className="w-full bg-[#9BA0CC] h-[1px]"></div>
         </div>
 
         {!showEOA && (
           <div
-            className="button w-full rounded-lg border-[#D0D5DD] border-[1px] bg-[rgb(64, 153, 255)] flex justify-center cursor-pointer py-[10px] px-4"
+            className="button w-full rounded-lg flex justify-center cursor-pointer py-[10px] px-4"
             onClick={() => setShowEOA(true)}
           >
             <Image src="/wallet.svg" width="22" height="22" alt="" />
-            <div className="ml-3 font-medium text-[#344054]">{`${authType == "signup" ? "Sign up" : "Login"} with EOA`}</div>
+            <div className="ml-3 font-medium text-white font-mono">{`${authType == "signup" ? "Sign up" : "Login"} with EOA`}</div>
           </div>
         )}
 
@@ -220,7 +220,7 @@ export default function ConnectWallet(props) {
           let name = connector.name;
           if (name == "WalletConnectLegacy") name = "WalletConnect"
           return (
-            <button className="button mb-3 w-full rounded-lg border-[#D0D5DD] border-[1px] bg-white flex justify-center cursor-pointer py-[10px] px-4"
+            <button className="button mb-3 w-full rounded-lg flex justify-center cursor-pointer py-[10px] px-4"
               disabled={!connector.ready}
               onClick={() => {
                 if (!connecting) connect({ connector })
@@ -232,15 +232,15 @@ export default function ConnectWallet(props) {
               ) : (
                 <Image src="/wallet.svg" width="22" height="22" alt="" />
               )}
-              <div className="ml-3 font-medium text-[#344054]">{`${authType == "signup" ? "Sign up" : "Login"} with ${name}`}</div>
+              <div className="ml-3 font-medium text-sm text-white font-mono">{`${authType == "signup" ? "Sign up" : "Login"} with ${name}`}</div>
             </button>
           )
         }))}
 
-        <div className="flex items-center w-full justify-center cursor-default mt-8 select-none">
-          <div className="text-[#667085] mr-1">{authType == "signup" ? "Already have an account?" : "Don't have an account?"}</div>
+        <div className="flex items-center w-full justify-center cursor-default mt-8 select-none text-sm">
+          <div className="text-[#9BA0CC] font-mono mr-1">{authType == "signup" ? "Already have an account?" : "Don't have an account?"}</div>
           <div 
-            className="font-medium text-[#2D4EA2] cursor-pointer transition hover:opacity-80"
+            className="font-medium font-mono text-[#7BFAFC] cursor-pointer transition hover:opacity-80"
             onClick={() => {
               if(authType == "signup"){
                 setAuthType("login")
@@ -249,7 +249,7 @@ export default function ConnectWallet(props) {
               }
             }}
           >
-            {authType == "signup" ? "Login" : "Sign up"}
+            {authType == "signup" ? "Log in" : "Sign up"}
           </div>
         </div>
 
