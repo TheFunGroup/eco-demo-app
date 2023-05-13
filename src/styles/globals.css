@@ -43,7 +43,6 @@ html, body, #__next{
   border: 1px solid #E4E7EC1f;
   /* box-shadow: 0px 20px 24px -4px rgba(16, 24, 40, 0.1), 0px 8px 8px -4px rgba(16, 24, 40, 0.04); */
   border-radius: 12px;
-  padding: 24px;
 }
 
 .nftSelectModal {
@@ -55,6 +54,8 @@ html, body, #__next{
 }
 
 .alert{
+  position: relative;
+  top: -132px;
   background: #FCFCFD;
   border: 1px solid #E4E7EC;
   box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.1), 0px 4px 6px -2px rgba(16, 24, 40, 0.05);
@@ -71,6 +72,16 @@ html, body, #__next{
 .button:hover{
   background: #FFFFFF20;
 }
+
+.actionBtn{
+  background: #08132D;
+  cursor: pointer;
+}
+
+.actionBtn:hover{
+  background: #0a1737;
+}
+
 
 .button-dark{
   background: #2B2F43;
@@ -133,10 +144,9 @@ html, body, #__next{
 
 .copy {
   border-radius: 8px;
-  box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.1), 0px 4px 6px -2px rgba(16, 24, 40, 0.05);
-  background: white;
+  background: #08132D;
   text-align: center;
-  color: #344054;
+  color: #9BA0CC;
   padding: 8px 12px;
   margin-top: -44px;
   margin-bottom: 8px;
@@ -146,7 +156,7 @@ html, body, #__next{
 .smallCopy {
   border-radius: 8px;
   box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.1), 0px 4px 6px -2px rgba(16, 24, 40, 0.05);
-  background: white;
+  background: #08132D;
   text-align: center;
   color: #344054;
   padding: 6px 8px;

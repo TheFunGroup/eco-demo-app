@@ -7,7 +7,7 @@ export default function Home() {
     const {wallet, network} = useFun();
 
     return (
-      <div className="w-full flex flex-col items-center pt-[200px]">
+      <div className="w-full flex flex-col items-center">
         
         {(wallet && network) && (
           <div className="w-full flex flex-col items-center">

@@ -175,10 +175,10 @@ export default function ConnectWallet(props) {
     )
   } else {
     return (
-      <div className={`w-[360px] modal flex flex-col items-center text-center -mt-[64px]`} >
+      <div className={`w-[360px] modal p-6 flex flex-col items-center text-center -mt-[64px]`} >
         <Image src="/eco.svg" width="52" height="42" alt="" />
-        <div className="font-black text-2xl mt-6 text-white">Welcome Eco!</div>
-        <div className="text-sm font-mono text-[#7BFAFC] mt-1">Explore FunWallet</div>
+        <div className="font-black text-2xl mt-6 text-white">Eco Wallet</div>
+        <div className="text-sm font-mono text-[#7BFAFC] mt-2">Secure & decentralized</div>
 
         <div className="mt-8 flex w-full justify-between">
           {Object.keys(socials).map((key) => {

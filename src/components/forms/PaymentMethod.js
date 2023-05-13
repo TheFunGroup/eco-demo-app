@@ -35,7 +35,7 @@ export default function PaymentMethod(props) {
             style={{background: token == "ECO" ? "#2D4EA214" : "", borderColor: token == "ECO" ? "#2D4EA2" : "#E4E7EC"}}
             onClick={() => setToken("ECO")}
           >
-            <img src="/ecoIcon.png" width="16" height="16" alt="" className='min-w-[16px] max-w-[16px] min-h-[16px] max-h-[16px]'/>
+            <img src="/eco.svg" width="16" height="16" alt="" className='min-w-[16px] max-w-[16px] min-h-[16px] max-h-[16px]'/>
             <div className="ml-[6px]">ECO</div>
           </div>
           {/* <div 
