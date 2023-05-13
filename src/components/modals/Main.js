@@ -50,17 +50,9 @@ export default function Main(props) {
             <NetworkSelect />
             <WalletView />
           </div>
-          {/* <a href="https://shuttleone.io/testnet/faucet.html" target="_blank"><div className="button text-[#667085] text-sm rounded-md border-[1px] border-[#667085] mt-3 cursor-pointer px-2">Goerli Faucet</div></a> */}
         </div>
       </div>
       <div className="w-full mt-6">
-        <div className="button flex items-center text-sm p-4" onClick={() => goToPage("/nft")}>
-          <Image src="/mint.svg" width="40" height="40" alt=""/>
-          <div className="ml-3">
-            <div className="font-medium text-[#344054]">Mint NFT</div>
-            <div className="text-[#667085]">Create a Non-Fungible Token on the Ethereum blockchain.</div>
-          </div>
-        </div>
         <div className="button flex items-center text-sm p-4 mt-4" onClick={() => goToPage("/swap")}>
           <Image src="/swap.svg" width="40" height="40" alt=""/>
           <div className="ml-3">

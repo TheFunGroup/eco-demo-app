@@ -9,6 +9,7 @@ import { handleGetNFTs } from "../../scripts/getNFTs";
 import { useRouter } from "next/router";
 import { disconnect } from '@wagmi/core'
 import erc20Abi from "../../utils/erc20Abi";
+import { QRCode } from 'react-qrcode-logo';
 
 export default function WalletView(props) {
 
@@ -24,6 +25,7 @@ export default function WalletView(props) {
   const [showCopy, setShowCopy] = useState(false)
   const [copying, setCopying] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
+  const [showQR, setShowQR] = useState(false)
 
   const [usdcBalance, setUsdcBalance] = useState();
   const [usdcBalanceUSD, setUsdcBalanceUSD] = useState();
@@ -150,19 +152,24 @@ export default function WalletView(props) {
       )}
       {dropdown && (
         <div className="dropdown w-[343px] absolute mt-2 -ml-[172px] pt-0 " ref={dropdownRef}>
-          {!showSettings && (
+          {(!showSettings && !showQR) && (
             <div className="flex flex-col items-center w-full">
               <div className="flex items-center w-full justify-between py-[18px] px-6 border-b-[1px] border-[#00000014]">
                 <div className="flex items-center text-sm">
                   <div className="text-black mr-2 whitespace-nowrap font-bold">Fun Wallet</div>
-                  <div
-                    onMouseEnter={() => setShowCopy(true)}
-                    onMouseLeave={() => setShowCopy(false)}
-                    onClick={handleCopyAddr}
-                    className="cursor-pointer mt-[2px]"
-                  >
-                    {showCopy && (<div className="copy">{copying ? "Copied!" : "Click to Copy"}</div>)}
-                    <div className="font-mono text-[#667085] mr-1" >{`${addr.substring(0, 5)}...${addr.substring(addr.length - 4)}`}</div>
+                  <div className="flex items-center">
+                    <div
+                      onMouseEnter={() => setShowCopy(true)}
+                      onMouseLeave={() => setShowCopy(false)}
+                      onClick={handleCopyAddr}
+                      className="cursor-pointer mt-[2px]"
+                    >
+                      {showCopy && (<div className="copy -mr-[8px]">{copying ? "Copied!" : "Click to Copy"}</div>)}
+                      <div className="font-mono text-[#667085] mr-1" >{`${addr.substring(0, 5)}...${addr.substring(addr.length - 4)}`}</div>
+                    </div>
+                    <Image src="/qr.svg" width="16" height="16" alt="" className="ml-[6px] cursor-pointer"
+                      onClick={() => setShowQR(true)}
+                    />
                   </div>
                 </div>
                 <Image src="/gear.svg" width="24" height="24" alt="" className="cursor-pointer" onClick={() => setShowSettings(true)} />
@@ -170,6 +177,7 @@ export default function WalletView(props) {
               {tab == "balance" && (
                 <div className="p-6 pt-0 w-full flex items-center flex-col max-h-[427px] overflow-y-scroll">
                   <Image src="/profile.svg" width="80" height="80" className="mt-4" alt="" />
+
                   <div className="flex items-end">
                     <div className="text-[32px] font-semibold mr-1">{Number(balance).toFixed(6)}</div>
                     <div className="text-[#667085] mb-2">{networks[network]?.nativeCurrency.symbol}</div>
@@ -240,22 +248,6 @@ export default function WalletView(props) {
                 </div>
               )}
 
-
-              <div className="w-full border-t-[1px] border-[#E4E7EC] flex items-center h-[64px]">
-                <div
-                  className={`w-full h-[64px] flex items-center justify-center ${tab == "balance" ? "" : "cursor-pointer opacity-50"}`}
-                  onClick={() => setTab("balance")}
-                >
-                  <img src="home.svg" width="24" height="24" />
-                </div>
-                <div
-                  className={`w-full h-[64px] flex items-center justify-center ${tab == "nfts" ? "" : "cursor-pointer opacity-50"}`}
-                  onClick={() => setTab("nfts")}
-                >
-                  <img src="nfts.svg" width="24" height="24" />
-                </div>
-              </div>
-
             </div>
           )}
 
@@ -289,6 +281,47 @@ export default function WalletView(props) {
                   <Image src="/leave.svg" width="24" height="24" alt="" className="mr-3" />
                   <div className="text-black font-medium">Logout</div>
                 </div>
+              </div>
+
+            </div>
+
+          )}
+
+
+          {showQR && (
+            <div className="flex flex-col items-center w-full">
+              <div className="flex items-center w-full py-[19px] px-6 border-b-[1px] border-[#00000014]">
+                <Image src="/arrow-left.svg" width="24" height="22" alt="" className="cursor-pointer" onClick={() => setShowQR(false)} />
+                <div className="text-black ml-4 whitespace-nowrap font-bold text-sm">FunWallet QR Code</div>
+              </div>
+              <div className="w-full p-6 flex flex-col items-center">
+                <div className="mt-2">
+                  <QRCode 
+                    value={addr}
+                    logoImage="/eco.png"
+                    logoPadding={6}
+                    size={200}
+                    bgColor="#f9f9f9"
+                  />
+                </div>
+                
+                <div className="cursor-pointer mt-10 flex items-center flex-col"
+                  onMouseEnter={() => setShowCopy(true)}
+                  onMouseLeave={() => setShowCopy(false)}
+                  onClick={handleCopyAddr}
+                >
+                  {(showCopy || copying) && (<div className="smallCopy -mr-[8px]">{copying ? "Copied!" : "Click to Copy"}</div>)}
+                  <div className="w-full flex items-center">
+                    <div className="font-mono text-[#667085]">{`${addr.substring(0, 14)}...${addr.substring(addr.length-3)}`}</div>
+                    <Image src="/copy.svg" alt="" width="16" height="16"/>
+                  </div>
+                </div>
+
+                <a className="button w-full flex items-center justify-between p-4 mt-4" href={`https://goerli.etherscan.io/address/${addr}`} target="_blank">
+                  <div className="text-black font-semibold">Block Explorer</div>
+                  <Image src="/explorer-blue.svg" width="32" height="32" alt="" />
+                </a>
+
               </div>
 
             </div>

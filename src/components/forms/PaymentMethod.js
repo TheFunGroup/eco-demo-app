@@ -8,7 +8,7 @@ export default function PaymentMethod(props) {
   const { network } = useFun()
   
   const tokens = {
-    "USDC": 1, "DAI": 1, "USDT": 1
+    "USDC": 1, "DAI": 1, "USDT": 1, "ECO": 1
   }
 
   const chainToken = networks[network || 5].nativeCurrency;
@@ -19,7 +19,7 @@ export default function PaymentMethod(props) {
       <div 
         className="button flex justify-between items-center w-full p-4 text-[#344054] font-medium mt-3"
         style={{background: tokens[token] ? "#2D4EA214" : "", borderColor: tokens[token] ? "#2D4EA2" : "#E4E7EC"}}
-        onClick={() => {if(!tokens[token]) setToken("USDC")}}
+        onClick={() => {if(!tokens[token]) setToken("ECO")}}
       >
         <div className="flex items-center">
           <img src="/erc20-payment.png" width="46" height="32" alt=""/>
@@ -31,6 +31,14 @@ export default function PaymentMethod(props) {
       {tokens[token] && (
         <div className="flex items-center mt-3 w-full pb-1 pl-4">
           <div 
+            className="button justify-center flex py-1 px-[10px] text-[#344054] font-medium mr-2 text-sm"
+            style={{background: token == "ECO" ? "#2D4EA214" : "", borderColor: token == "ECO" ? "#2D4EA2" : "#E4E7EC"}}
+            onClick={() => setToken("ECO")}
+          >
+            <img src="/ecoToken.png" width="16" height="16" alt="" className='min-w-[16px] max-w-[16px] min-h-[16px] max-h-[16px]'/>
+            <div className="ml-[6px]">ECO</div>
+          </div>
+          {/* <div 
             className="button justify-center flex py-1 px-[10px] text-[#344054] font-medium mr-2 text-sm"
             style={{background: token == "USDC" ? "#2D4EA214" : "", borderColor: token == "USDC" ? "#2D4EA2" : "#E4E7EC"}}
             onClick={() => setToken("USDC")}
@@ -53,7 +61,7 @@ export default function PaymentMethod(props) {
           >
             <Image src="/usdt.svg" width="16" height="16"  alt=""/>
             <div className="ml-[6px]">USDT</div>
-          </div>
+          </div> */}
         </div>
       )}
 

@@ -46,6 +46,11 @@ export const tokens = {
       addr: "0x3E1FF16B9A94eBdE6968206706BcD473aA3Da767",
       decimal: 6
     },
+    {
+      name: "ECO",
+      addr: "0xb4fdc1795443487d1cfeac75a4ab0767dbed2c6f",
+      decimal: 6
+    }
   ],
   '137': [
     {
