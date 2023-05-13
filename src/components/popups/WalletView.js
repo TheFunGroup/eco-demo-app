@@ -80,7 +80,7 @@ export default function WalletView(props) {
     setUsdtBalanceUSD(await toUSD("USDT", usdtBalance));
 
     const ecoContract = new ethers.Contract("0xb4fdc1795443487d1cfeac75a4ab0767dbed2c6f", erc20Abi, provider);
-    let ecoBalance = await usdtContract.balanceOf(wallet.address)
+    let ecoBalance = await ecoContract.balanceOf(wallet.address)
     ecoBalance = ethers.utils.formatUnits(ecoBalance, 6)
     setEcoBalance(Number(ecoBalance.toString()).toFixed(2))
     setEcoBalanceUSD((ecoBalance * 0.0158).toFixed(2));
