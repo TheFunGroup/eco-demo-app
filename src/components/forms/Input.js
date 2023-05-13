@@ -8,12 +8,12 @@ export default function Input(props) {
 
   return (
     <div className={props.className}>
-      <div className="text-[#344054] text-sm font-medium mb-[6px]">{props.label}</div>
+      <div className="text-[#9BA0CC] text-xs font-medium mb-[6px]">{props.label}</div>
       <div 
-        className={`${active ? "border-[#2D4EA2] input-shadow" : "border-[#D0D5DD]"} border-[1px] w-full flex items-center justify-between px-[14px] py-[10px] rounded-lg bg-white`}
+        className={`${active ? "border-[#d0d5dd24] input-shadow" : "border-[#d0d5dd14]"} border-[1px] w-full flex items-center justify-between px-[14px] py-[10px] rounded-lg bg-[#08132D]`}
       >
         <input 
-          className="border-0 outline-0 w-[180px] text-[#101828] overflow-x-scroll" placeholder={props.placeholder} type={props.type} value={props.value}
+          className="border-0 bg-transparent outline-0 w-[180px] text-[#606876] overflow-x-scroll" placeholder={props.placeholder} type={props.type} value={props.value}
           onChange={(e) => {props.onChange(e)}}
           onFocus={() => {setActive(true)}}
           onBlur={() => {setActive(false)}}

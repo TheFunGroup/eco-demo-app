@@ -31,11 +31,11 @@ export const tokens = {
       addr: "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6",
       decimal: 18
     },
-    // {
-    //   name: "USDC",
-    //   addr: "0xaa8958047307da7bb00f0766957edec0435b46b5",
-    //   decimal: 6
-    // },
+    {
+      name: "USDC",
+      addr: "0xaa8958047307da7bb00f0766957edec0435b46b5",
+      decimal: 6
+    },
     // {
     //   name: "DAI",
     //   addr: "0x855af47cdf980a650ade1ad47c78ec1deebe9093",

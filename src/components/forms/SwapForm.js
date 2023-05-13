@@ -45,7 +45,7 @@ export default function SwapForm(props) {
 
       <div className="w-full flex items-center mb-4">
         <Input 
-          className="w-[287px]" 
+          className="w-[45%]" 
           label="Slippage %"
           placeholder="0.30"
           type="number"
@@ -57,7 +57,7 @@ export default function SwapForm(props) {
       <div className="w-full flex items-center justify-between">
 
         <Input 
-          className="w-[287px]" 
+          className="w-[45%]" 
           label="Exchange Quantity & Token"
           placeholder="0.00"
           type="number"
@@ -76,7 +76,7 @@ export default function SwapForm(props) {
         <Image className="mt-7 cursor-pointer" src="/switch.svg" width="20" height="20" onClick={handleSwitch} alt=""/>
 
         <Input 
-          className="w-[287px]" 
+          className="w-[45%]" 
           label="Quantity & Token to Receive"
           placeholder="0.00"
           type="number"

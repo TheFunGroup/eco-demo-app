@@ -26,9 +26,9 @@ export default function TokenSelect(props) {
   })
 
   return (
-    <div className="">
-      <div ref={selectBtnRef} className="flex items-center cursor-pointer" onClick={() => setDropdown(!dropdown)}>
-        <div className="text-[#101828] mr-1">{token.name}</div>
+    <div className="-mr-2">
+      <div ref={selectBtnRef} className="w-fit flex items-center cursor-pointer justify-end" onClick={() => setDropdown(!dropdown)}>
+        <div className="text-[#9BA0CC] text-right">{token.name}</div>
         <Image src="/chevron.svg" width="20" height="20" alt="" style={dropdown && {transform: "rotate(-180deg)"}}
           className="duration-200 ease-linear"
         />
@@ -42,14 +42,14 @@ export default function TokenSelect(props) {
                 className={`
                   w-full flex justify-between px-[14px] py-[10px] ${nonToken?.name == t.name ? "cursor-not-allowed" : "cursor-pointer"}
                   ${idx == 0 && "rounded-t-xl"} ${idx == tokens[network].length - 1 && "rounded-b-xl"}
-                  ${t.name == (token.name) ? "bg-[#2D4EA214]" : t.name == hover ? "bg-[#2D4EA207]" : "bg-white"}
+                  ${t.name == (token.name) ? "bg-[#08132D]" : t.name == hover ? "bg-[#0a1633]" : "bg-transparent"}
                 `}
                 onClick={() => {nonToken?.name !== t.name && setToken(t)}}
                 onMouseEnter={() => setHover(t.name)}
                 onMouseLeave={() => setHover("")}
                 key={idx}
               >
-                <div className="text-[#101828] text-sm">{t.name}</div>
+                <div className="text-[#9BA0CC] text-sm">{t.name}</div>
                 <div>
                   {t.name == token && (
                     <Image src="/check.svg" width="20" height="20" alt=""/>

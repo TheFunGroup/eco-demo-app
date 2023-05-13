@@ -13,7 +13,7 @@
 }
 
 *::selection{
-  background: rgba(0, 0, 120, 0.05);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 input::-webkit-outer-spin-button,
@@ -82,6 +82,31 @@ html, body, #__next{
   background: #0a1737;
 }
 
+.cancelBtn{
+  color: #3764EC;
+  border: 1px solid #3764EC;
+  border-radius: 69px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.cancelBtn:hover{
+  opacity: 0.8;
+}
+
+.submitBtn{
+  background: #3764EC;
+  border: 1px solid #3764EC;
+  border-radius: 69px;
+  cursor: pointer;
+  color: white;
+  transition: 0.25s;
+}
+
+.submitBtn:hover{
+  opacity: 0.8;
+}
+
 
 .button-dark{
   background: #2B2F43;
@@ -107,9 +132,8 @@ html, body, #__next{
 }
 
 .dropdown{
-  background: linear-gradient(125.87deg, rgba(255, 255, 255, 0.69) 0%, rgba(255, 255, 255, 0.42) 99.97%), #EDF1F4;
-  border: 1px solid #E4E7EC;
-  box-shadow: 0px 20px 24px -4px rgba(16, 24, 40, 0.1), 0px 8px 8px -4px rgba(16, 24, 40, 0.04);
+  background: #0b1a3c;
+  border: #0b1a3c;
   border-radius: 12px;
 }
 
