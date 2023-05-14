@@ -18,6 +18,8 @@ export default function ConnectWallet(props) {
   const { data: signer } = useSigner()
   const wagmiProvider = useProvider()
   const { setWallet, setNetwork, setEOA, setLoading } = useFun()
+  const [checkingLoginStatus, setCheckingLoginStatus] = useState(true);
+  const [connected, setConnected] = useState(false);
   const [connecting, setConnecting] = useState();
   const [showEOA, setShowEOA] = useState(false);
   const [showLinkMore, setShowLinkMore] = useState(false);
@@ -48,7 +50,6 @@ export default function ConnectWallet(props) {
         setLinked({ ...linked, ...Linked });
         setShowLinkMore(true);
       }
-
     }
     initMagicAuth()
   }, [])
@@ -77,6 +78,25 @@ export default function ConnectWallet(props) {
     if (router.query.provider) finishSocialLogin();
   }, [router.query]);
 
+  const checkUserLoggedIn = async () => {
+    if (magic) {
+      setCheckingLoginStatus(true);  // Set to true when the check begins
+      const isLoggedIn = await magic.user.isLoggedIn();
+      if (isLoggedIn) {
+        setConnected(true);
+        const metadata = await magic.user.getMetadata();
+        let publicAddress = metadata.publicAddress;
+        let authId = `${metadata.oauth?.provider}###${metadata.email || metadata.oauth?.userInfo?.preferredUsername}`;
+        const provider = new ethers.providers.Web3Provider(magic.rpcProvider);
+        connectFunWallet(metadata.oauth?.provider, authId, provider, publicAddress);
+      }
+      setCheckingLoginStatus(false);  // Set to false when the check is done
+    }
+  };
+  useEffect(() => {
+    checkUserLoggedIn();
+  }, [magic]);
+
   async function connectFunWallet(connector, authId, provider, publicKey) {
     // const authIdUsed = await isAuthIdUsed(authId)
     // if (!authIdUsed) {
@@ -90,6 +110,7 @@ export default function ConnectWallet(props) {
     //   setConnecting("")
     //   return;
     // }
+
     const auth = new MultiAuthEoa({ provider, authIds: [[authId, publicKey]] })
     const FunWallet = await createFunWallet(auth)
     const addr = await FunWallet.getAddress()
@@ -164,7 +185,7 @@ export default function ConnectWallet(props) {
       console.log("connect wallet connect error", err)
     }
   }
-
+ 
   if (showLinkMore) {
     return (
       <LinkAccounts
@@ -173,7 +194,9 @@ export default function ConnectWallet(props) {
         setProvider={setProvider} connecting={connecting} setConnecting={setConnecting} signer={signer}
       />
     )
-  } else {
+  } else if (checkingLoginStatus) {
+    return <Spinner />;
+  } else if (!connected) {
     return (
       <div className={`w-[360px] modal p-6 flex flex-col items-center text-center -mt-[64px]`} >
         <Image src="/eco.svg" width="52" height="42" alt="" />
