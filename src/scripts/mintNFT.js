@@ -34,16 +34,16 @@ export const handleMintNFT = async function (wallet, paymentToken, nft, auth) {
       const erc20Contract = new ethers.Contract(paymentaddr, erc20ABI.abi, provider)
 
       const iscontract = await isContract(walletAddress)
-      if (iscontract) {
+      // if (iscontract) {
         let allowance = await erc20Contract.allowance(walletAddress, paymasterAddress)//paymaster address
         allowance = ethers.utils.formatUnits(allowance, 6);
         if (Number(allowance) < Number(20)) {//amt
           //if approved, pop up modal, and ask for approval
           return { success: false, mustApprove: true, paymasterAddress, tokenAddr: paymentaddr }
         }
-      } else {
-        return { success: false, error: "Its a known bug that first transaction of a fun wallet would fail if you are covering gas using ERC20 tokens. Please try to pay gas using ETH for this transaction and try token paymaster later." }
-      }
+      // } else {
+        // return { success: false, error: "Its a known bug that first transaction of a fun wallet would fail if you are covering gas using ERC20 tokens. Please try to pay gas using ETH for this transaction and try token paymaster later." }
+      // }
     }
     else if(paymentToken=="gasless"){
       await configureEnvironment({
