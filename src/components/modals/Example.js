@@ -208,7 +208,7 @@ export default function Example(props) {
         </div>
       )}
 
-      {!mustApprove && (
+      {mustApprove && (
         <div className="alert w-full flex justify-between -mb-[80px] relative">
           <div className="flex items-center">
             <Image src="/alert.svg" width="24" height="24" alt=""/>
