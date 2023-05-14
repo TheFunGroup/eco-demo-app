@@ -88,7 +88,18 @@ export default function Main(props) {
           <div className="font-black text-3xl text-white">{ecoBalance}</div>
           <div className="font-bold text-lg text-[#9BA0CC] ml-1">ECO</div>
         </div>
-        <div className="text-[#7BFAFC] text-lg font-bold">{`$${ecoBalanceUSD}`}</div>
+        <div className="text-[#7BFAFC] text-lg font-bold">{`$${(Number(balanceUSD) + Number(ecoBalanceUSD) + Number(usdcBalanceUSD)).toFixed(2) }`}</div>
+
+        <div className="flex items-center w-full justify-between mt-8">
+          <div className="flex items-center">
+            <Image src="/eco.svg" width="40" height="40" alt=""/>
+            <div className="ml-4">
+              <div className="font-bold text-white text-lg">ECO</div>
+              <div className="text-[#9BA0CC]">{`${ecoBalance} ECO`}</div>
+            </div>
+          </div>
+          <div className="text-white">{`$${ecoBalanceUSD}`}</div>
+        </div>
 
         <div className="flex items-center w-full justify-between mt-8">
           <div className="flex items-center">

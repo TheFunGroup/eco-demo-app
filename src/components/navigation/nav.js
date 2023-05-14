@@ -52,7 +52,7 @@ export default function Nav(props) {
     <div className="w-full flex items-center justify-between py-2 mb-6">
       <div className="flex items-center">
         <Image src='eco.svg' width="48" height="48" alt=""/>
-        <div className="font-black text-2xl text-white">Welcome Eco!</div>
+        <div className="font-black text-xl text-white">Welcome Eco!</div>
       </div>
       <div className="flex items-center">
         <div
