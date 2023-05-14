@@ -88,7 +88,7 @@ export default function ConnectWallet(props) {
         let publicAddress = metadata.publicAddress;
         let authId = `${metadata.oauth?.provider}###${metadata.email || metadata.oauth?.userInfo?.preferredUsername}`;
         const provider = new ethers.providers.Web3Provider(magic.rpcProvider);
-        connectFunWallet(metadata.oauth?.provider, authId, provider, publicAddress);
+        await connectFunWallet(metadata.oauth?.provider, authId, provider, publicAddress);
       }
       setCheckingLoginStatus(false);  // Set to false when the check is done
     }
@@ -233,8 +233,20 @@ export default function ConnectWallet(props) {
           <div
             className="button w-full rounded-lg flex justify-center cursor-pointer py-[10px] px-4"
             onClick={() => setShowEOA(true)}
-          >
-            <Image src="/wallet.svg" width="22" height="22" alt="" />
+          > 
+            {connectors.filter((connector) => {
+              let name = connector.name;
+              if (name == "WalletConnectLegacy") name = "WalletConnect";
+              if(name == connecting){
+                return true
+              } else {
+                return false
+              }
+            })[0] ? (
+              <Spinner />
+            ) : (
+              <Image src="/wallet.svg" width="22" height="22" alt="" />
+            )}
             <div className="ml-3 font-medium text-white font-mono">{`${authType == "signup" ? "Sign up" : "Login"} with EOA`}</div>
           </div>
         )}
