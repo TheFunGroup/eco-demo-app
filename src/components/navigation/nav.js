@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import Image from 'next/image';
 import { networks } from "../../utils/networks";
@@ -7,6 +7,7 @@ import { toUSD } from "../../scripts/prices";
 import { ethers } from "ethers";
 import erc20Abi from "../../utils/erc20Abi";
 import { QRCode } from 'react-qrcode-logo';
+import { useOnClickOutside } from "../../hooks/useOnClickOutside";
 
 export default function Nav(props) {
 
@@ -18,6 +19,7 @@ export default function Nav(props) {
   const [copying, setCopying] = useState(false)
 
   const [addr, setAddr] = useState("")
+  const qrCode = useRef();
 
   useEffect(() => {
     if (networks[network]) {
@@ -42,6 +44,10 @@ export default function Nav(props) {
     }, 1500)
   }
 
+  useOnClickOutside(qrCode, (e) => {
+    setShowQR(false)
+  }) 
+
   return (
     <div className="w-full flex items-center justify-between py-2 mb-6">
       <div className="flex items-center">
@@ -62,6 +68,19 @@ export default function Nav(props) {
           onClick={() => setShowQR(true)}
         />
       </div>
+      {showQR && (
+        <div className="w-full h-full backdrop-blur-[6px] bg-[#00000025] absolute top-0 left-0 flex flex-col items-center justify-center">
+          <div ref={qrCode}>
+            <QRCode 
+              value={addr}
+              logoImage="/eco.png"
+              logoPadding={6}
+              size={200}
+              bgColor="#f9f9f9"
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -28,8 +28,8 @@ export default function ApprovePM(props) {
 
   return (
     <div className="w-full">
-      <div className="text-[#101828] font-semibold text-xl">Give permission to pay for gas</div>
-      <div className="text-[#667085] text-sm mt-1 whitespace-nowrap">Give Fun access to tokens to pay gas fees.</div>
+      <div className="text-white font-bold text-lg">Give permission to pay for gas</div>
+      <div className="text-[#606876] font-mono text-sm mt-1 whitespace-nowrap">Give Fun access to tokens to pay gas fees.</div>
       <div className="w-full mt-6 flex items-center justify-between">
         
         <Input 
@@ -47,19 +47,20 @@ export default function ApprovePM(props) {
        
       </div>
 
-      <div className="flex w-full items-center justify-between mt-10 text-center">
+      <div className="flex w-full items-center justify-between mt-8 text-center">
 
-        <div className="w-[224px] button p-3 font-medium text-[#344054]" onClick={() => router.push("/")}>Cancel</div>
+        <div className="w-[226px] cancelBtn p-3 font-medium" onClick={() => router.push("/")}>Cancel</div>
         <div 
-          className="w-[224px] button-dark p-3 font-medium flex items-center justify-center"
+          className="w-[226px] submitBtn p-3 font-medium flex items-center justify-center"
           onClick={approve}
           style={ approving ? { opacity: 0.8, pointerEvents: "none" } : {}}
-        > 
+        >
           {approving && (<Spinner marginRight="6px"/>)} 
           <div>Give Access</div>
         </div>
 
       </div>
+
 
     </div>
   )
