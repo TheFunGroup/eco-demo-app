@@ -28,7 +28,7 @@ export default function ReceiverSelect(props) {
   return (
     <div className="">
       <div ref={selectBtnRef} className="flex items-center cursor-pointer" onClick={() => setDropdown(!dropdown)}>
-        <div className="text-[#101828] mr-1">{type}</div>
+        <div className="text-[#9BA0CC] mr-1">{type}</div>
         <Image src="/chevron.svg" width="20" height="20" alt="" style={dropdown && {transform: "rotate(-180deg)"}}
           className="duration-200 ease-linear"
         />
@@ -41,14 +41,14 @@ export default function ReceiverSelect(props) {
                 className={`
                   w-full flex justify-between px-[14px] py-[10px] cursor-pointer
                   ${idx == 0 && "rounded-t-xl"} ${idx == 1 && "rounded-b-xl"}
-                  ${t == type ? "bg-[#2D4EA214]" : t == hover ? "bg-[#2D4EA207]" : "bg-white"}
+                  ${t == type ? "bg-[#08132D]" : t == hover ? "bg-[#0a1633]" : "bg-transparent"}
                 `}
                 onClick={() => {setType(t)}}
                 onMouseEnter={() => setHover(t)}
                 onMouseLeave={() => setHover("")}
                 key={idx}
               >
-                <div className="text-[#101828] text-sm">{types[t]}</div>
+                <div className="text-[#9BA0CC] text-sm">{types[t]}</div>
                 <div>
                   {t == type && (
                     <Image src="/check.svg" width="20" height="20" alt=""/>

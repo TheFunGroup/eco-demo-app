@@ -20,10 +20,10 @@ export default function TransferForm(props) {
   }
 
   return (
-    <div className="w-full flex items-center justify-between">
+    <div className="w-full">
 
       <Input 
-        className="w-[309px]" 
+        className="w-full" 
         label="Transfer Quantity & Token"
         placeholder="0.00"
         type="number"
@@ -36,7 +36,7 @@ export default function TransferForm(props) {
       />
 
       <Input 
-        className="w-[309px]" 
+        className="w-full mt-6" 
         label="Receiver Address"
         placeholder={usingTwitter ? "@chamath" : "0x..."}
         value={usingTwitter ? receiverTwitter : receiverAddr}

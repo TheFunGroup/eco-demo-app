@@ -7,7 +7,7 @@ export default function Minted(props) {
   const { deployedUrl, minted } = useFun()
 
   return (
-    <div className="modal w-[420px] my-24 flex flex-col items-center">
+    <div className="w-full flex flex-col items-center">
       
       <div className="flex items-center">
         <img width="112" height="112" className="border-[4px] border-[#F2F6F7] rounded-[20px] z-10" src={`/nft${minted}.png`}/>

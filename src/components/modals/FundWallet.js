@@ -27,7 +27,7 @@ export default function FundWallet(props) {
   }
 
   return (
-    <div className="modal w-[512px] my-12">
+    <div className="w-full">
       <div className="text-[#101828] font-semibold text-xl">Fund your Fun Wallet</div>
       <div className="text-[#667085] text-sm mt-1 whitespace-nowrap">Add test network tokens to your wallet to complete transactions.</div>
       <div className="w-full mt-2 text-sm text-[#667085]">

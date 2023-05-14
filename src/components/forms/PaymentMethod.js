@@ -26,7 +26,7 @@ export default function PaymentMethod(props) {
           <img src="/eco.svg" width="32" height="32" alt=""/>
           <div className="ml-4">ECO Token</div>
         </div>
-        <Image src={tokens[token] ? "/checked.svg" : "/uncheck.svg"} width="20" height="20"  alt=""/>
+        {/* <Image src={tokens[token] ? "/checked.svg" : "/uncheck.svg"} width="20" height="20"  alt=""/> */}
       </div>
 
       <div 
@@ -38,7 +38,7 @@ export default function PaymentMethod(props) {
           <img src={"/ethereum.svg"} width="32" height="32" alt=""/>
           <div className="ml-4">{chainToken.name}</div>
         </div>
-        <Image src={token == chainToken.symbol ? "/checked.svg" : "/uncheck.svg"} width="20" height="20" alt=""/>
+        {/* <Image src={token == chainToken.symbol ? "/checked.svg" : "/uncheck.svg"} width="20" height="20" alt=""/> */}
       </div>
     </div>
   )

@@ -27,7 +27,7 @@ export default function ApprovePM(props) {
   }
 
   return (
-    <div className="modal w-[512px] my-12">
+    <div className="w-full">
       <div className="text-[#101828] font-semibold text-xl">Give permission to pay for gas</div>
       <div className="text-[#667085] text-sm mt-1 whitespace-nowrap">Give Fun access to tokens to pay gas fees.</div>
       <div className="w-full mt-6 flex items-center justify-between">
