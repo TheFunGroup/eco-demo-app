@@ -3,8 +3,8 @@ export const handleFundWallet = async function (addr) {
     try {
         await fetch(`${FAUCETURL}get-faucet?token=eth&testnet=goerli&addr=${addr}`)
         await fetch(`${FAUCETURL}get-faucet?token=usdc&testnet=goerli&addr=${addr}`)
-        await fetch(`${FAUCETURL}get-faucet?token=dai&testnet=goerli&addr=${addr}`)
-        await fetch(`${FAUCETURL}get-faucet?token=usdt&testnet=goerli&addr=${addr}`)
+        // await fetch(`${FAUCETURL}get-faucet?token=dai&testnet=goerli&addr=${addr}`)
+        // await fetch(`${FAUCETURL}get-faucet?token=usdt&testnet=goerli&addr=${addr}`)
         await fetch(`${FAUCETURL}get-faucet?token=eco&testnet=goerli&addr=${addr}`)
         await fetch(`${FAUCETURL}stake-token?testnet=goerli&addr=${addr}`)
 

@@ -42,6 +42,9 @@ export default function TransferForm(props) {
         value={usingTwitter ? receiverTwitter : receiverAddr}
         onChange={(e) => {
           if(usingTwitter){
+            if(e.target.value[0] !== "@"){
+              e.target.value = "@" + e.target.value;
+            }
             setReceiverTwitter(e.target.value)
           } else {
             setReceiverAddr(e.target.value)}

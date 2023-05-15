@@ -137,7 +137,11 @@ html, body, #__next{
 
 .dropdown{
   background: #0b1a3c;
-  border: #0b1a3c;
+  border-radius: 12px;
+}
+
+.walletDropdown{
+  background: #18233b;
   border-radius: 12px;
 }
 

@@ -1,14 +1,18 @@
-const USDECOPrice = .015
 export const getSwapAmount = async function (token1, amt, token2) {
   try {
-    const swapInfo = await (await fetch(`https://min-api.cryptocompare.com/data/price?fsym=${token1.name}&tsyms=${token2.name}`)).json()
-    const ETHUSD = await toUSD("ETH", amt)
-    let amount = swapInfo[token2.name] * amt;
-    if(token2.name.toLowerCase() =="eco"){
-      amount = ETHUSD/USDECOPrice
-    }
-    else if(token1.name.toLowerCase() =="eco"){
-      amount = USDECOPrice/ETHUSD
+    let swapInfo;
+    let amount;
+    if(token1.name.toLowerCase() == "eco"){
+      if(token2.name.toLowerCase() == "usdc") token2.name = "USD";
+      swapInfo = await (await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${token1.name.toLowerCase()}&vs_currencies=${token2.name.toLowerCase()}`)).json();
+      amount = swapInfo[token1.name.toLowerCase()][token2.name.toLowerCase()] * amt;
+    } else if(token2.name.toLowerCase() == "eco"){
+      let ecoUSD = await toUSD("eco", 1, 4);
+      let tokenUSD = await toUSD(token1.name.toLowerCase(), 1, 4);
+      amount = (tokenUSD * amt) / ecoUSD;
+    } else {
+      swapInfo = await (await fetch(`https://min-api.cryptocompare.com/data/price?fsym=${token1.name.toLowerCase()}&tsyms=${token2.name.toLowerCase()}`)).json()
+      amount = swapInfo[token2.name] * amt;
     }
     return amount.toFixed(2)
   } catch(e){
@@ -16,16 +20,18 @@ export const getSwapAmount = async function (token1, amt, token2) {
   }
 }
 
-export const toUSD = async function(token, amt){
+export const toUSD = async function(token, amt, fixed=2){
   try {
     let amount;
-    if(token.toLowerCase() == "eco"){
-      amount = USDECOPrice * amt;
+    let swapInfo;
+    if(token.toLowerCase() == "eco"){ 
+      swapInfo = await (await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=eco&vs_currencies=usd`)).json()
+      amount = swapInfo["eco"]["usd"] * amt;
     } else {
-      const swapInfo = await (await fetch(`https://min-api.cryptocompare.com/data/price?fsym=${token}&tsyms=usd`)).json()
+      swapInfo = await (await fetch(`https://min-api.cryptocompare.com/data/price?fsym=${token}&tsyms=usd`)).json()
       amount = swapInfo["USD"] * amt;
     }
-    return amount.toFixed(2)
+    return amount.toFixed(fixed)
   } catch(e){
     console.log(e)
   }

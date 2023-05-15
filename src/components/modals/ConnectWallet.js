@@ -94,7 +94,12 @@ export default function ConnectWallet(props) {
     }
   };
   useEffect(() => {
-    checkUserLoggedIn();
+    if(localStorage.getItem("wallet connected")){
+      checkUserLoggedIn()
+    } else {
+      setConnected(false);
+      setCheckingLoginStatus(false)
+    }
   }, [magic]);
 
   async function connectFunWallet(connector, authId, provider, publicKey) {
@@ -110,7 +115,6 @@ export default function ConnectWallet(props) {
     //   setConnecting("")
     //   return;
     // }
-
     const auth = new MultiAuthEoa({ provider, authIds: [[authId, publicKey]] })
     const FunWallet = await createFunWallet(auth)
     const addr = await FunWallet.getAddress()
@@ -127,6 +131,7 @@ export default function ConnectWallet(props) {
     } catch (e) {
       console.log(e)
     }
+    localStorage.setItem("wallet connected", "true")
     setProvider(provider)
     setWallet(FunWallet);
     setEOA(auth)
