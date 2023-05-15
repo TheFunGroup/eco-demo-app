@@ -97,11 +97,15 @@ export default function ConnectWallet(props) {
         const metadata = await magic.user.getMetadata();
         let publicAddress = metadata.publicAddress;
         const provider = new ethers.providers.Web3Provider(magic.rpcProvider);
+        console.log("Auth Id", authId);
+        console.log("Magic", magic.rpcProvider);
+        console.log("public address", publicAddress);
         await connectFunWallet(null, authId, provider, publicAddress);
       }
       setCheckingLoginStatus(false);  // Set to false when the check is done
     }
   };
+
   useEffect(() => {
     if(localStorage.getItem("wallet connected")){
       checkUserLoggedIn()
@@ -178,6 +182,11 @@ export default function ConnectWallet(props) {
       authId = `${result.oauth.provider}###${authId}`;
       localStorage.removeItem("magic-connecting");
       localStorage.setItem("auth id", authId);
+
+      console.log("Auth Id", authId);
+      console.log("Magic", magic.rpcProvider);
+      console.log("public address", publicAddress);
+
       const isLinking = localStorage.getItem("magic-linking");
       const provider = new ethers.providers.Web3Provider(magic.rpcProvider);
       if (isLinking && !linked[result.oauth.provider]) {
