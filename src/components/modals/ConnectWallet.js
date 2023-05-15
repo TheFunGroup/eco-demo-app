@@ -75,6 +75,8 @@ export default function ConnectWallet(props) {
         setNetwork(5)
         const eoaAddr = await signer.getAddress();
         if (!provider.getBalance) provider = (await connector.getSigner()).provider;
+        localStorage.removeItem("auth id");
+        localStorage.removeItem("magic connecting")
         // console.log("eoa connect")
         connectFunWallet(connector.name, eoaAddr, provider, eoaAddr);
       }
@@ -113,7 +115,7 @@ export default function ConnectWallet(props) {
 
   useEffect(() => {
     console.log("magic connecting", localStorage.getItem("magic-connecting"))
-    if(localStorage.getItem("wallet connected") && !localStorage.getItem("magic-connecting")){
+    if(localStorage.getItem("magic connected") && !localStorage.getItem("magic-connecting")){
       console.log("checkUserLoggedIn");
       checkUserLoggedIn()
     } else {
@@ -171,7 +173,6 @@ export default function ConnectWallet(props) {
     } catch (e) {
       console.log(e)
     }
-    localStorage.setItem("wallet connected", "true")
     setCreating(false)
     setProvider(provider)
     setWallet(FunWallet);
@@ -195,6 +196,7 @@ export default function ConnectWallet(props) {
       localStorage.removeItem("magic-connecting");
 
       localStorage.setItem("auth id", authId);
+      localStorage.setItem("magic connected", "true")
 
       // console.log("Auth Id", authId);
       // console.log("Magic", magic.rpcProvider);

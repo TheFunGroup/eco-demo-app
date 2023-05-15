@@ -99,7 +99,7 @@ export default function Nav(props) {
               setWallet(null);
               setEOA(null)
               disconnect();
-              localStorage.removeItem("wallet connected")
+              localStorage.removeItem("magic connected")
             }}>Log Out</div>
           </div>
         )}
