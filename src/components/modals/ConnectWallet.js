@@ -111,6 +111,7 @@ export default function ConnectWallet(props) {
   };
 
   useEffect(() => {
+    console.log("magic connecting", localStorage.getItem("magic-connecting"))
     if(localStorage.getItem("wallet connected") && !localStorage.getItem("magic-connecting")){
       console.log("checkUserLoggedIn");
       checkUserLoggedIn()
