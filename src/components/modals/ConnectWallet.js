@@ -25,7 +25,7 @@ export default function ConnectWallet(props) {
   const { data: signer } = useSigner()
   const wagmiProvider = useProvider()
   const { setWallet, setNetwork, setEOA, setLoading } = useFun()
-  const [checkingLoginStatus, setCheckingLoginStatus] = useState(false);
+  const [checkingLoginStatus, setCheckingLoginStatus] = useState(true);
   const [connected, setConnected] = useState(false);
   const [connecting, setConnecting] = useState();
   const [showEOA, setShowEOA] = useState(false);
@@ -111,16 +111,16 @@ export default function ConnectWallet(props) {
     }
   };
 
-  // useEffect(() => {
-  //   console.log("magic connecting", localStorage.getItem("magic-connecting"))
-  //   if(localStorage.getItem("wallet connected") && !localStorage.getItem("magic-connecting")){
-  //     console.log("checkUserLoggedIn");
-  //     checkUserLoggedIn()
-  //   } else {
-  //     setConnected(false);
-  //     setCheckingLoginStatus(false)
-  //   }
-  // }, [magic]);
+  useEffect(() => {
+    console.log("magic connecting", localStorage.getItem("magic-connecting"))
+    if(localStorage.getItem("wallet connected") && !localStorage.getItem("magic-connecting")){
+      console.log("checkUserLoggedIn");
+      checkUserLoggedIn()
+    } else {
+      setConnected(false);
+      setCheckingLoginStatus(false)
+    }
+  }, [magic]);
 
   useEffect(() => {
     if(creating){
