@@ -25,7 +25,7 @@ export default function ConnectWallet(props) {
   const { data: signer } = useSigner()
   const wagmiProvider = useProvider()
   const { setWallet, setNetwork, setEOA, setLoading } = useFun()
-  const [checkingLoginStatus, setCheckingLoginStatus] = useState(true);
+  const [checkingLoginStatus, setCheckingLoginStatus] = useState(false);
   const [connected, setConnected] = useState(false);
   const [connecting, setConnecting] = useState();
   const [showEOA, setShowEOA] = useState(false);
@@ -75,7 +75,7 @@ export default function ConnectWallet(props) {
         setNetwork(5)
         const eoaAddr = await signer.getAddress();
         if (!provider.getBalance) provider = (await connector.getSigner()).provider;
-        console.log("eoa connect")
+        // console.log("eoa connect")
         connectFunWallet(connector.name, eoaAddr, provider, eoaAddr);
       }
     }
@@ -89,38 +89,38 @@ export default function ConnectWallet(props) {
   }, [router.query]);
 
   const checkUserLoggedIn = async () => {
-    console.log("in check user login")
+    // console.log("in check user login")
     if (magic) {
-      console.log("magic", magic);
+      // console.log("magic", magic);
       setCheckingLoginStatus(true);  // Set to true when the check begins
       const isLoggedIn = await magic.user.isLoggedIn();
       let authId = localStorage.getItem("auth id");
-      console.log("User is logged in magic", isLoggedIn);
-      console.log("local auth id", authId)
+      // console.log("User is logged in magic", isLoggedIn);
+      // console.log("local auth id", authId)
       if (isLoggedIn && authId) {
         setConnected(true);
         const metadata = await magic.user.getMetadata();
         let publicAddress = metadata.publicAddress;
         const provider = new ethers.providers.Web3Provider(magic.rpcProvider);
-        console.log("Auth Id", authId);
-        console.log("Magic", magic.rpcProvider);
-        console.log("public address", publicAddress);
+        // console.log("Auth Id", authId);
+        // console.log("Magic", magic.rpcProvider);
+        // console.log("public address", publicAddress);
         await connectFunWallet(null, authId, provider, publicAddress);
       }
       setCheckingLoginStatus(false);  // Set to false when the check is done
     }
   };
 
-  useEffect(() => {
-    console.log("magic connecting", localStorage.getItem("magic-connecting"))
-    if(localStorage.getItem("wallet connected") && !localStorage.getItem("magic-connecting")){
-      console.log("checkUserLoggedIn");
-      checkUserLoggedIn()
-    } else {
-      setConnected(false);
-      setCheckingLoginStatus(false)
-    }
-  }, [magic]);
+  // useEffect(() => {
+  //   console.log("magic connecting", localStorage.getItem("magic-connecting"))
+  //   if(localStorage.getItem("wallet connected") && !localStorage.getItem("magic-connecting")){
+  //     console.log("checkUserLoggedIn");
+  //     checkUserLoggedIn()
+  //   } else {
+  //     setConnected(false);
+  //     setCheckingLoginStatus(false)
+  //   }
+  // }, [magic]);
 
   useEffect(() => {
     if(creating){
@@ -137,10 +137,10 @@ export default function ConnectWallet(props) {
   }, [creating])
 
   async function connectFunWallet(connector, authId, provider, publicKey) {
-    console.log("Connect fun wallet");
-    console.log("authID", authId);
-    console.log("provider", provider);
-    console.log("publicKey", publicKey);
+    // console.log("Connect fun wallet");
+    // console.log("authID", authId);
+    // console.log("provider", provider);
+    // console.log("publicKey", publicKey);
 
     // const authIdUsed = await isAuthIdUsed(authId)
     // if (!authIdUsed) {
@@ -196,9 +196,9 @@ export default function ConnectWallet(props) {
 
       localStorage.setItem("auth id", authId);
 
-      console.log("Auth Id", authId);
-      console.log("Magic", magic.rpcProvider);
-      console.log("public address", publicAddress);
+      // console.log("Auth Id", authId);
+      // console.log("Magic", magic.rpcProvider);
+      // console.log("public address", publicAddress);
 
       const isLinking = localStorage.getItem("magic-linking");
       const provider = new ethers.providers.Web3Provider(magic.rpcProvider);
