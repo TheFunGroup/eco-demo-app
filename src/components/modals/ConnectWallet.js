@@ -12,6 +12,13 @@ import { Magic } from 'magic-sdk';
 import { OAuthExtension } from '@magic-ext/oauth';
 import socials from "../../utils/socials";
 
+const creatingMsgs = [
+  `Initializing your paymaster and loading your wallet with funds. Goerli is slow! This should take about ~30 seconds. Thank you for your patience.`,
+  `.25 ETH has been deposited into your fun wallet.`,
+  `1000 ECO has been deposited into your fun wallet.`,
+  `1000 USDC has been deposited into your fun wallet.`
+]
+
 export default function ConnectWallet(props) {
   const { connect, connectors } = useConnect()
   const { connector } = useAccount()
@@ -28,7 +35,9 @@ export default function ConnectWallet(props) {
   const [provider, setProvider] = useState();
   const router = useRouter()
   const [magic, setMagic] = useState()
-  const [authType, setAuthType] = useState("signup")
+  const [authType, setAuthType] = useState("signup");
+  const [creating, setCreating] = useState();
+  const [createMsg, setCreateMsg] = useState(0);
 
   useEffect(() => {
     const initMagicAuth = async () => {
@@ -102,6 +111,20 @@ export default function ConnectWallet(props) {
     }
   }, [magic]);
 
+  useEffect(() => {
+    if(creating){
+      setTimeout(() => {
+        setCreateMsg(1);
+        setTimeout(() => {
+          setCreateMsg(2)
+          setTimeout(() => {
+            setCreateMsg(3)
+          }, 7000)
+        }, 7000)
+      }, 10000)
+    }
+  }, [creating])
+
   async function connectFunWallet(connector, authId, provider, publicKey) {
     // const authIdUsed = await isAuthIdUsed(authId)
     // if (!authIdUsed) {
@@ -123,6 +146,7 @@ export default function ConnectWallet(props) {
       let balance = await provider.getBalance(addr);
       balance = ethers.utils.formatEther(balance);
       if (balance == 0) {
+        setCreating(true)
         FunWallet.deployed = false;
         await useFaucet(addr, 5);
       } else {
@@ -132,6 +156,7 @@ export default function ConnectWallet(props) {
       console.log(e)
     }
     localStorage.setItem("wallet connected", "true")
+    setCreating(false)
     setProvider(provider)
     setWallet(FunWallet);
     setEOA(auth)
@@ -201,6 +226,14 @@ export default function ConnectWallet(props) {
     )
   } else if (checkingLoginStatus) {
     return <Spinner />;
+  } else if (creating){
+    return (
+      <div className="w-[400px] modal p-6 flex flex-col items-center">
+        <Spinner />
+        <div className="font-black text-2xl mt-3 text-white text-center">Setting up Wallet</div>
+        <div className="text-sm font-mono text-[#7BFAFC] mt-3 text-left">{creatingMsgs[createMsg]}</div>
+      </div>
+    )
   } else if (!connected) {
     return (
       <div className={`w-[360px] modal p-6 flex flex-col items-center text-center -mt-[64px]`} >
@@ -233,6 +266,8 @@ export default function ConnectWallet(props) {
           <div className="text-[#9BA0CC] mx-2">OR</div>
           <div className="w-full bg-[#9BA0CC] h-[1px]"></div>
         </div>
+
+        {}
 
         {!showEOA && (
           <div

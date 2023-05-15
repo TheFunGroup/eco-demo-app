@@ -84,6 +84,14 @@ export default function Main(props) {
       )}
 
       <div className="w-full bg-[#08132D] rounded-xl py-6 px-8 flex flex-col items-center cursor-default">
+
+        <div className="w-full flex justify-end items-center -mb-[32px]">
+          <div
+            className="submitBtn py-[4px] px-2 font-bold text-sm"
+            onClick={() => router.push("/fund")}
+          >Fund</div>
+        </div>
+
         <div className="flex items-end">
           <div className="font-black text-3xl text-white">{ecoBalance}</div>
           <div className="font-bold text-lg text-[#9BA0CC] ml-1">ECO</div>
