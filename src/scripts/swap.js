@@ -59,10 +59,10 @@ export const handleSwap = async function (wallet, paymentToken, swapData, auth) 
       // if (iscontract) {
         const erc20Contract = new ethers.Contract(paymentaddr, erc20ABI.abi, provider)
         let allowance = await erc20Contract.allowance(walletAddress, paymasterAddress)//paymaster address
-        allowance = ethers.utils.formatUnits(allowance, 6);
-
+        allowance = ethers.utils.formatUnits(await gasSponsor.getTokenBalance(paymentaddr, walletAddress),6)
+        console.log(allowance)
         if (Number(allowance) < Number(20)) {//amt
-          //if approved, pop up modal, and ask for approval
+          // if approved, pop up modal, and ask for approval
           return { success: false, mustApprove: true, paymasterAddress, tokenAddr: paymentaddr }
 
         }

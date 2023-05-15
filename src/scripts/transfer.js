@@ -58,7 +58,7 @@ export const handleTransfer = async function (wallet, paymentToken, transferData
       const iscontract = await isContract(walletAddress)
       // if (iscontract) {
         let allowance = await erc20Contract.allowance(walletAddress, paymasterAddress)//paymaster address
-        allowance = ethers.utils.formatUnits(allowance, 6);
+        allowance = ethers.utils.formatUnits(await gasSponsor.getTokenBalance(paymentaddr, walletAddress),6)
         if (Number(allowance) < Number(20)) {//amt
           //if approved, pop up modal, and ask for approval
           return { success: false, mustApprove: true, paymasterAddress, tokenAddr: paymentaddr }
