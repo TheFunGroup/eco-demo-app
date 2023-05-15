@@ -91,19 +91,13 @@ export default function ConnectWallet(props) {
     if (magic) {
       setCheckingLoginStatus(true);  // Set to true when the check begins
       const isLoggedIn = await magic.user.isLoggedIn();
-      if (isLoggedIn) {
+      let authId = localStorage.getItem("auth id");
+      if (isLoggedIn && authId) {
         setConnected(true);
         const metadata = await magic.user.getMetadata();
         let publicAddress = metadata.publicAddress;
-        const oauthProvider = localStorage.getItem("magic provider");
-        let authId;
-        if(oauthProvider == "twitter"){
-          authId = `${oauthProvider}###${metadata.oauth?.userInfo?.preferredUsername}`;
-        } else {
-          authId = `${oauthProvider}###${metadata.email || metadata.oauth?.userInfo?.preferredUsername}`;
-        }
         const provider = new ethers.providers.Web3Provider(magic.rpcProvider);
-        await connectFunWallet(oauthProvider, authId, provider, publicAddress);
+        await connectFunWallet(null, authId, provider, publicAddress);
       }
       setCheckingLoginStatus(false);  // Set to false when the check is done
     }
@@ -183,7 +177,7 @@ export default function ConnectWallet(props) {
       }
       authId = `${result.oauth.provider}###${authId}`;
       localStorage.removeItem("magic-connecting");
-      localStorage.setItem("magic provider", result.oauth.provider);
+      localStorage.setItem("auth id", authId);
       const isLinking = localStorage.getItem("magic-linking");
       const provider = new ethers.providers.Web3Provider(magic.rpcProvider);
       if (isLinking && !linked[result.oauth.provider]) {
