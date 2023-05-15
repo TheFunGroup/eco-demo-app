@@ -75,6 +75,7 @@ export default function ConnectWallet(props) {
         setNetwork(5)
         const eoaAddr = await signer.getAddress();
         if (!provider.getBalance) provider = (await connector.getSigner()).provider;
+        console.log("eoa connect")
         connectFunWallet(connector.name, eoaAddr, provider, eoaAddr);
       }
     }
@@ -136,6 +137,11 @@ export default function ConnectWallet(props) {
   }, [creating])
 
   async function connectFunWallet(connector, authId, provider, publicKey) {
+    console.log("Connect fun wallet");
+    console.log("authID", authId);
+    console.log("provider", provider);
+    console.log("publicKey", publicKey);
+
     // const authIdUsed = await isAuthIdUsed(authId)
     // if (!authIdUsed) {
     //   if (!linked[connector]) {
