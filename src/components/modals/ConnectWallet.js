@@ -88,10 +88,14 @@ export default function ConnectWallet(props) {
   }, [router.query]);
 
   const checkUserLoggedIn = async () => {
+    console.log("in check user login")
     if (magic) {
+      console.log("magic", magic);
       setCheckingLoginStatus(true);  // Set to true when the check begins
       const isLoggedIn = await magic.user.isLoggedIn();
       let authId = localStorage.getItem("auth id");
+      console.log("User is logged in magic", isLoggedIn);
+      console.log("local auth id", authId)
       if (isLoggedIn && authId) {
         setConnected(true);
         const metadata = await magic.user.getMetadata();
@@ -107,7 +111,8 @@ export default function ConnectWallet(props) {
   };
 
   useEffect(() => {
-    if(localStorage.getItem("wallet connected")){
+    if(localStorage.getItem("wallet connected") && !localStorage.getItem("magic-connecting")){
+      console.log("checkUserLoggedIn");
       checkUserLoggedIn()
     } else {
       setConnected(false);
@@ -181,6 +186,7 @@ export default function ConnectWallet(props) {
       }
       authId = `${result.oauth.provider}###${authId}`;
       localStorage.removeItem("magic-connecting");
+
       localStorage.setItem("auth id", authId);
 
       console.log("Auth Id", authId);
